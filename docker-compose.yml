@@ -1,0 +1,23 @@
+version: '3.4'
+services:
+  node:
+    user: myuser
+    build:
+      context: .
+      target: dev
+      dockerfile: ./tools/docker/Dockerfile
+      args:
+        USER_ID: $USER_ID
+        GROUP_ID: $GROUP_ID
+    working_dir: /app
+    volumes:
+      - .:/app
+      # NOTE: to exclude node_modules into docker container
+      - /app/node_modules/
+    command:
+      >
+        sh -i -c -e
+        "
+        yarn dev
+        "
+    network_mode: "host"

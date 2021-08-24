@@ -1,0 +1,74 @@
+{
+  "title": "Input schema for conversion.ai scraper",
+  "description": "Below you can provide param which will be used to set parameters to conversion.ai for skills. <br/> <strong>Important: Proxy is required to use this solution</strong>",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "task": {
+      "title": "Task",
+      "type": "object",
+      "description": "The task you want to run on conversion.ai. Please be aware that the object content is different for each type",
+      "default": {},
+      "editor": "json",
+      "prefill": {}
+    },
+    "maxRequestRetries": {
+      "title": "Max request retries",
+      "type": "integer",
+      "description": "How many times a page will be retried in case of being blocked or other errors.",
+      "default": 5
+    },
+    "proxy": {
+      "title": "Proxy configuration",
+      "type": "object",
+      "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
+      "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
+      "editor": "proxy"
+    },
+    "useChrome": {
+      "title": "Use Chrome",
+      "type": "boolean",
+      "description": "Use Chrome to run",
+      "default": true
+    },
+    "extendOutputFunction": {
+      "title": "Extend Output Function",
+      "description": "Add or remove properties on the output object or omit the output returning null",
+      "type": "string",
+      "default": "",
+      "prefill": "async ({ data, item, itemSpec, page, request, customData }) => {\n  return item;\n}",
+      "editor": "javascript",
+      "sectionCaption": "Extend scraper functionality",
+      "sectionDescription": "You can change the output of the items for your dataset here, or add additional behavior on the scraper."
+    },
+    "extendScraperFunction": {
+      "title": "Extend Scraper Function",
+      "description": "Advanced function that allows you to extend the default scraper functionality, allowing you to manually perform actions on the page",
+      "type": "string",
+      "default": "",
+      "prefill": "async ({ page, request, itemSpec, customData, Apify }) => {\n \n}",
+      "editor": "javascript"
+    },
+    "customData": {
+      "title": "Custom data",
+      "description": "Any data that you want to have available inside the Extend Output/Scraper Function",
+      "default": {},
+      "prefill": {},
+      "type": "object",
+      "editor": "json"
+    },
+    "maxConcurrency": {
+      "title": "Max Concurrency",
+      "type": "integer",
+      "description": "Max number of allowed instances running in parallel. More instances need more memory!",
+      "editor": "number",
+      "default": 1000
+    },
+    "debugLog": {
+      "title": "Debug Log",
+      "description": "Enable a more verbose logging to be able to understand what's happening during the scraping",
+      "type": "boolean"
+    }
+  },
+  "required": ["task"]
+}

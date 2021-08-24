@@ -1,0 +1,38 @@
+{
+  "name": "crimegrade-scraper",
+  "version": "0.0.1",
+  "description": "This is a boilerplate of an Apify actor.",
+  "main": "build/main.js",
+  "dependencies": {
+    "apify": "^1.2.1",
+    "debug": "^4.3.1",
+    "dotenv": "^10.0.0",
+    "lodash": "^4.17.21",
+    "make-error": "^1.3.6",
+    "puppeteer": "*",
+    "typescript": "^4.3.2"
+  },
+  "devDependencies": {
+    "@onr/eslint-config": "^0.2.5",
+    "@onr/prettier-config": "^1.1.0",
+    "@types/lodash": "^4.14.170",
+    "@types/node": "^15.6.1",
+    "eslint": "^7.0.0",
+    "gulp": "^4.0.2",
+    "prettier": "^2.3.1",
+    "ts-node": "^10.0.0"
+  },
+  "prettier": "@onr/prettier-config",
+  "scripts": {
+    "dev": "tsc --watch -p tsconfig.json",
+    "apify": "DEBUG=crimegrade-scraper:* apify run --purge",
+    "start:watch": "gulp watch",
+    "start": "node -r dotenv/config build/main.js",
+    "build": "tsc -p tsconfig.json",
+    "lint": "./node_modules/.bin/eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "./node_modules/.bin/eslint ./src --ext .js,.jsx --fix",
+    "test": "echo \"Error: oops, the actor has no tests yet, sad!\" && exit 1"
+  },
+  "author": "It's not you it's me",
+  "license": "ISC"
+}

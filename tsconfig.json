@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2015",
+      "ES2016",
+      "ES2018",
+      "ES2019.Object",
+      "ES2018.AsyncIterable",
+      "ES2020.String",
+      "ES2019.Array"
+    ],
+    "rootDir": "src/",
+    "outDir": "build/"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

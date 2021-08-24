@@ -1,0 +1,9 @@
+# This file tells Git which files shouldn't be added to source control
+
+.idea
+node_modules
+build
+apify_storage
+/types
+/screenshots
+.env
