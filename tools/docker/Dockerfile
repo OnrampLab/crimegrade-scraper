@@ -19,14 +19,16 @@ ENV GROUP_ID=${GROUP_ID:-1001}
 RUN addgroup --gid ${GROUP_ID} user
 RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} user
 
-RUN usermod -a -G user myuser
+RUN usermod -a -G user user
 
-RUN chown -Rh myuser:user /app
+RUN chown -Rh user:user /app
 
-ADD package.json ./
+ADD package.json /app
 
-RUN yarn install
+ADD yarn.lock /app
 
-RUN chown -Rh myuser:user /app/node_modules
+RUN yarn --production=false
+
+RUN chown -Rh user:user /app/node_modules
 
 ENV APIFY_DISABLE_OUTDATED_WARNING 1

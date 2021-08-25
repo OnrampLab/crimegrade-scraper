@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   node:
-    user: myuser
+    user: user
     build:
       context: .
       target: dev
