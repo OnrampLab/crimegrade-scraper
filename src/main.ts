@@ -16,7 +16,7 @@ Apify.main(async () => {
     throw new Error('Missing input');
   }
 
-  const { proxy, debugLog = false, useStealth = false, useChrome } = input;
+  const { zipCode, proxy, debugLog = false, useStealth = false, useChrome } = input;
 
   if (debugLog) {
     logUtil.setLevel(logUtil.LEVELS.DEBUG);
@@ -28,7 +28,7 @@ Apify.main(async () => {
 
   const startUrls = [
     {
-      url: 'https://crimegrade.org/safest-places-in-60629/',
+      url: `https://crimegrade.org/safest-places-in-${zipCode}`,
     },
   ];
 
