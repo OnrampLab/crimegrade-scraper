@@ -1,6 +1,6 @@
 import Apify, { pushData } from 'apify';
 import { Log } from 'apify-shared/log';
-import { Page } from 'puppeteer';
+import { ElementHandle, Page } from 'puppeteer';
 import { InfoError } from '../../../errors';
 import { Input } from '../../../types';
 import { screenshot } from '../../../utils';
@@ -13,6 +13,7 @@ const {
 const CSS_SELECTORS = {
   MAP: '.MapSurround',
   OVERALL_GRADE: '.overallGradeLetter',
+  CONTENT: 'h2 + p, h3 + p',
 }
 
 const XPATH_SELECTOR = {
@@ -37,6 +38,11 @@ type CrimeStatisticDetail = {
   rate: number;
 }
 
+type CrimeContent = {
+  title: string;
+  descriptions: string[];
+}
+
 export class BaseHandler extends AbstractHandler {
   protected name: string;
   protected log: Log;
@@ -54,7 +60,8 @@ export class BaseHandler extends AbstractHandler {
 
       const baseInfo = await this.getBaseInfo(page);
       const statistics = await this.getStatistics(page);
-      const result = Object.assign({},  baseInfo, statistics);
+      const contents = await this.getContents(page);
+      const result = Object.assign({},  baseInfo, statistics, contents);
 
       if (saveResult) {
         await pushData(result);
@@ -134,5 +141,38 @@ export class BaseHandler extends AbstractHandler {
     }
 
     return result;
+  }
+
+  private async getContents(page: Page) {
+    const contents = await page.$$(CSS_SELECTORS.CONTENT);
+    const result: CrimeContent[] = [];
+
+    for (let content of contents) {
+      const data = {} as CrimeContent;
+
+      data.title = await content.evaluate(element => element.previousElementSibling.innerHTML);
+      data.descriptions = [];
+
+      let currentContentNode: ElementHandle = await content.evaluateHandle(element => element);
+
+      while (true) {
+        const description = await currentContentNode.evaluate(element => element.innerHTML);
+
+        data.descriptions.push(description);
+
+        const nextContentNode: ElementHandle  = await currentContentNode.evaluateHandle(element => element.nextElementSibling);
+        const nextContentNodeName = await nextContentNode.evaluate(element => element ? element.nodeName : null);
+
+        if (!nextContentNodeName || nextContentNodeName !== 'P') {
+          break;
+        }
+
+        currentContentNode = nextContentNode;
+      }
+
+      result.push(data);
+    }
+
+    return { contents: result };
   }
 }
