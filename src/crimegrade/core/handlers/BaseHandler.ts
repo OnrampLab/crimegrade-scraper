@@ -2,39 +2,42 @@ import Apify, { pushData } from 'apify';
 import { Log } from 'apify-shared/log';
 import { Page } from 'puppeteer';
 import { InfoError } from '../../../errors';
+import { Input } from '../../../types';
+import { screenshot } from '../../../utils';
 import { AbstractHandler } from './AbstractHandler';
 
 const {
   utils: { log },
 } = Apify;
 
+const CSS_SELECTORS = {
+  MAP: '.MapSurround',
+  OVERALL_GRADE: '.overallGradeLetter',
+}
+
 export class BaseHandler extends AbstractHandler {
   protected name: string;
-  protected dataKey: string;
   protected log: Log;
 
-  constructor() {
+  constructor(name: string) {
     super();
 
+    this.name = name;
     this.log = log.child({ prefix: this.constructor.name });
   }
 
-  async handle(page: Page, saveResult: boolean = true): Promise<any[]> {
+  async handle(page: Page, saveResult: boolean = true): Promise<any> {
     try {
-      this.log.info('Start handling skill task', { url: page.url() });
+      this.log.info('Start handling task', { url: page.url() });
 
-      await page.waitForXPath(`//button/div[contains(., "${this.name}")]`, {
-        visible: true,
-        timeout: 15000,
-      });
-
-      const contents = await this.getResult(page);
+      const baseInfo = await this.getBaseInfo(page);
+      const result = Object.assign({},  baseInfo);
 
       if (saveResult) {
-        await this.saveResult(contents, page);
+        await pushData(result);
       }
 
-      return contents;
+      return result;
     } catch (error) {
       if (error instanceof InfoError) {
         throw error;
@@ -49,19 +52,15 @@ export class BaseHandler extends AbstractHandler {
     }
   }
 
-  private async getResult(page: Page) {
-    const texts: string[] = await page.evaluate(dataKey =>
-      Array.from(document.querySelectorAll('pre')).map(element => element.innerText),
-    );
+  private async getBaseInfo(page: Page) {
+    const input: Input = (await Apify.getInput()) as any;
+    const mapImageLink = await screenshot(page, 'crime_map', CSS_SELECTORS.MAP);
+    const overallGrade = await (await page.$(CSS_SELECTORS.OVERALL_GRADE)).evaluate((element) => element.innerHTML);
 
-    const contents = texts.map(text => ({
-      [this.dataKey]: text,
-    }));
-    return contents;
-  }
-
-  private async saveResult(contents: { [x: string]: string }[], page: Page) {
-    const result = contents.map(content => ({ ...content, '#url': page.url() }));
-    await pushData(result);
+    return {
+      'zipCode': input.zipCode,
+      'mapImage': mapImageLink,
+      'grade': overallGrade,
+    };
   }
 }
