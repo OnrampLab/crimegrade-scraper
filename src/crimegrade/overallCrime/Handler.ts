@@ -15,6 +15,10 @@ export class Handler extends BaseHandler {
   protected dataKey: string;
   protected log: Log;
 
+  constructor() {
+    super('Overall Crime');
+  }
+
   static create() {
     return new Handler();
   }

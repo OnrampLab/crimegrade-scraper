@@ -4,13 +4,12 @@
   "type": "object",
   "schemaVersion": 1,
   "properties": {
-    "task": {
-      "title": "Task",
-      "type": "object",
-      "description": "The task you want to run on conversion.ai. Please be aware that the object content is different for each type",
-      "default": {},
-      "editor": "json",
-      "prefill": {}
+    "zipCode": {
+      "title": "Zip Code",
+      "type": "string",
+      "description": "The target zip code you want to scrape data on Crime Grade.",
+      "default": "",
+      "editor": "textfield"
     },
     "maxRequestRetries": {
       "title": "Max request retries",
@@ -70,5 +69,5 @@
       "type": "boolean"
     }
   },
-  "required": ["task"]
+  "required": ["zipCode"]
 }
