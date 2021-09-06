@@ -27,8 +27,308 @@ Apify.main(async () => {
   log.info('Starting Main Process', { useChrome, isAtHome: Apify.isAtHome() });
 
   const startUrls = [
+    // {
+    //   url: `https://crimegrade.org/safest-places-in-${zipCode}`,
+    // },
     {
-      url: `https://crimegrade.org/safest-places-in-${zipCode}`,
+      url: "https://crimegrade.org/safest-places-in-60002",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60004",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60005",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60007",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60008",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60010",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60012",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60013",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60014",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60015",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60016",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60018",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60020",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60021",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60022",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60025",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60026",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60029",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60030",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60031",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60033",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60034",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60035",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60040",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60041",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60042",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60043",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60044",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60045",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60046",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60047",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60048",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60050",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60051",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60053",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60056",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60060",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60061",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60062",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60064",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60067",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60068",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60069",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60070",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60071",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60072",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60073",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60074",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60076",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60077",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60081",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60083",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60084",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60085",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60087",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60088",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60089",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60090",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60091",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60093",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60096",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60097",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60098",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60099",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60101",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60102",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60103",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60104",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60106",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60107",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60108",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60109",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60110",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60111",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60112",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60113",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60115",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60118",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60119",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60120",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60123",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60124",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60126",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60129",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60130",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60131",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60133",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60134",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60135",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60136",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60137",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60139",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60140",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60141",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60142",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60143",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60144",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60145",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60146",
+    },
+    {
+      url: "https://crimegrade.org/safest-places-in-60148",
     },
   ];
 
