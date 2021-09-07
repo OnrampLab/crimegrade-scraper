@@ -67,6 +67,8 @@ export class BaseHandler extends AbstractHandler {
         await pushData(result);
       }
 
+      this.log.info('Finish handling task', { url: page.url() });
+
       return result;
     } catch (error) {
       if (error instanceof InfoError) {
