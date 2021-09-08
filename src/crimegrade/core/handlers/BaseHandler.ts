@@ -27,7 +27,7 @@ enum CRIME_CATEGORY {
 };
 
 type CrimeStatistic = {
-  catetory: CRIME_CATEGORY;
+  category: CRIME_CATEGORY;
   rate: number;
   grade: string;
   details: CrimeStatisticDetail[];
@@ -125,7 +125,7 @@ export class BaseHandler extends AbstractHandler {
     const totalValue = await (await totalRow.$x('./td[2]/div'))[0].evaluate(element => element.innerHTML);
     const [totalRate, totalGrade] = totalValue.split(' ');
 
-    result.catetory = category;
+    result.category = category;
     result.rate = Number(totalRate);
     result.grade = totalGrade.replace(/[\(\)]/g, '');
     result.details = [];
